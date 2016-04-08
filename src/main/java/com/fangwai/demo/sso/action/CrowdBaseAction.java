@@ -58,8 +58,7 @@ public class CrowdBaseAction extends BaseAction{
 		}
 	}
 	
-	public boolean isAuthenticated()
-    {
+	protected boolean isAuthenticated() {
         if (authenticated == null) {
             try {
                 //authenticated = crowdHttpAuthenticator.isAuthenticated(ServletActionContext.getRequest(), ServletActionContext.getResponse());
@@ -73,21 +72,15 @@ public class CrowdBaseAction extends BaseAction{
         return authenticated;
     }
 	
-	public User getRemoteUser()
-    {
+	protected User getRemoteUser(){
         if (!isAuthenticated())
             return null;
-
-        if (remoteUser == null)
-        {
-
-            try
-            {
+        if (remoteUser == null){
+            try{
                 // find the user from the authenticated token key.
                 remoteUser = crowdHttpAuthenticator.getUser(ServletActionContext.getRequest());
             }
-            catch (Exception e)
-            {
+            catch (Exception e){
                 e.printStackTrace();
             	//throw new InvalidAuthenticationException("", e);
             }
