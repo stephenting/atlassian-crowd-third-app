@@ -23,7 +23,7 @@
     
     <task:annotation-driven/>
     
-    <bean id="springContextHolder" class="com.whyonly.SpringContextHolder" />
+    <bean id="springContextHolder" class="com.fangwai.core.ssh.SpringContextHolder" />
 
 	<bean id="resourceLocator" class="com.atlassian.crowd.service.client.ClientResourceLocator">
         <constructor-arg value="crowd.properties"/>

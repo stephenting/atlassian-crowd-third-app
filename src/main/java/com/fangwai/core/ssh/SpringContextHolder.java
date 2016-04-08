@@ -1,4 +1,4 @@
-package com.whyonly;
+package com.fangwai.core.ssh;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

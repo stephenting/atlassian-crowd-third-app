@@ -10,7 +10,7 @@
     
     <package name="fangwai" extends="struts-default">
 	    <interceptors>
-			<interceptor name="session" class="com.whyonly.SessionInterceptor"/>
+			<interceptor name="session" class="com.fangwai.demo.sso.interceptor.SessionInterceptor"/>
 			<interceptor-stack name="whyonlyStack">
 				<interceptor-ref name="session">
 					<!--param name="excludeMethods">login</param-->

@@ -1,8 +1,10 @@
-package com.whyonly;
+package com.fangwai.demo.sso.interceptor;
 
 
 import java.util.stream.Stream;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,7 +15,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.atlassian.crowd.integration.AuthenticationState;
 import com.atlassian.crowd.integration.http.CrowdHttpAuthenticator;
+import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.service.client.CrowdClient;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -43,8 +47,9 @@ public class SessionInterceptor extends AbstractInterceptor{
 			return invocation.invoke();
 		}else{
 			AuthenticationState state = crowdHttpAuthenticator.checkAuthenticated(ServletActionContext.getRequest(), ServletActionContext.getResponse());
-			if(state.isAuthenticated())
+			if(state.isAuthenticated()){
 				return invocation.invoke();
+			}	
 			else
 				return "login";
 				

@@ -25,6 +25,19 @@ public class CrowdBaseAction extends BaseAction{
 	protected Boolean authenticated = null;
 	protected User remoteUser;
 	
+	protected String getSessionUsername(){
+		String username = (String)session.getAttribute("username");
+		if(username == null){
+			User user = getRemoteUser();
+			if(user != null)
+				return user.getName();
+			else
+				return null;
+		}else{
+			return username;
+		}
+	}
+	
 	protected void crowdLogin(String username, String password) {
 		try {
 			crowdHttpAuthenticator.authenticate(ServletActionContext.getRequest(), ServletActionContext.getResponse(), username, password);

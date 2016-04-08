@@ -38,7 +38,6 @@ public class LoginoutAction extends CrowdBaseAction{
 	})
 	
 	public String loginProc(){
-		session.setAttribute("username", username);
 		return SUCCESS; 
 	}
 	
@@ -56,7 +55,7 @@ public class LoginoutAction extends CrowdBaseAction{
 		}) 
 	})
 	public String mainpage(){
-		username = (String)session.getAttribute("username");
+		username = getSessionUsername();
 		return SUCCESS;
 	}
 	
@@ -68,7 +67,7 @@ public class LoginoutAction extends CrowdBaseAction{
 	
 	public String logout(){
 		super.crowdLogout();
-		session.invalidate();
+		request.getSession().invalidate();
 		return SUCCESS; 
 	}
 	
