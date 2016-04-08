@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.action.extension" value="do,html,html,action,"/>
+    
+    
+    <package name="fangwai" extends="struts-default">
+	    <interceptors>
+			<interceptor name="session" class="com.whyonly.SessionInterceptor"/>
+			<interceptor-stack name="whyonlyStack">
+				<interceptor-ref name="session">
+					<!--param name="excludeMethods">login</param-->
+				</interceptor-ref>	
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+	
+		<default-interceptor-ref name="whyonlyStack"/>
+	
+		<global-results>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</global-results>
+
+    </package>
+
+
+</struts>

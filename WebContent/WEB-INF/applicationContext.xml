@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/task  
+       http://www.springframework.org/schema/task/spring-task-4.0.xsd  
+       ">
+
+	<!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
+	<context:component-scan base-package="com.whyonly"/>
+	<context:component-scan base-package="com.fangwai"/>
+    <context:component-scan base-package="com.fangwai.**.service"/>
+    
+    <task:annotation-driven/>
+    
+    <bean id="springContextHolder" class="com.whyonly.SpringContextHolder" />
+
+	<bean id="resourceLocator" class="com.atlassian.crowd.service.client.ClientResourceLocator">
+        <constructor-arg value="crowd.properties"/>
+    </bean>
+ 
+    <bean id="clientProperties" class="com.atlassian.crowd.service.client.ClientPropertiesImpl" factory-method="newInstanceFromResourceLocator">
+        <constructor-arg type="com.atlassian.crowd.service.client.ResourceLocator" ref="resourceLocator"/>
+    </bean>
+ 
+    <bean id="crowdClientFactory" class="com.atlassian.crowd.integration.rest.service.factory.RestCrowdClientFactory"/>
+ 
+    <bean id="crowdClient" factory-bean="crowdClientFactory" factory-method="newInstance">
+        <constructor-arg ref="clientProperties"/>
+    </bean>
+ 
+    <bean id="validationFactorExtractor" class="com.atlassian.crowd.integration.http.util.CrowdHttpValidationFactorExtractorImpl" factory-method="getInstance"/>
+ 
+    <bean id="tokenHelper" class="com.atlassian.crowd.integration.http.util.CrowdHttpTokenHelperImpl" factory-method="getInstance">
+        <constructor-arg ref="validationFactorExtractor"/>
+    </bean>
+ 
+    <bean id="crowdHttpAuthenticator" class="com.atlassian.crowd.integration.http.CrowdHttpAuthenticatorImpl">
+        <constructor-arg ref="crowdClient"/>
+        <constructor-arg ref="clientProperties"/>
+        <constructor-arg ref="tokenHelper"/>
+    </bean>
+ 
+    <bean id="crowdSecurityFilter" class="com.whyonly.crowd.CrowdSecurityFilter">
+        <constructor-arg ref="crowdHttpAuthenticator"/>
+        <constructor-arg ref="clientProperties"/>
+    </bean>
+ 
+
+    
+</beans>
+
+
+
