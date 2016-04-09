@@ -29,7 +29,11 @@
         	</s:form>
         	
         	<p/><p/>
-        	<h4><a href="http://localhost:8095/crowd">访问Crowd (http://localhost:8095/crowd)</a></h4>
+        	<h4>Crowd      <a href="http://localhost:8095/crowd"> http://localhost:8095/crowd</a></h4>
+        	
+        	<h4>Jira      <a href="http://localhost:8081"> http://localhost:8081</a></h4>
+        	
+        	<h4>Jira Issue      <a href="http://localhost:8081/browse/GQHL-13"> http://localhost:8081/browse/GQHL-13 </a></h4>
         	
         
         </div>

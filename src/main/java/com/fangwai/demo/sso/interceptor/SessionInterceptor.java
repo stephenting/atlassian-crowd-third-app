@@ -51,8 +51,7 @@ public class SessionInterceptor extends AbstractInterceptor{
 				return invocation.invoke();
 			}	
 			else
-				return "login";
-				
+				return "login";		
 		}	
 	}
 

@@ -19,7 +19,4 @@ public class CrowdSecurityFilter extends com.atlassian.crowd.integration.http.fi
 		System.out.println("--CrowdSecurityFilter");
 		super.doFilter(servletRequest, servletResponse, filterChain);
 	}
-	
-	
-
 }

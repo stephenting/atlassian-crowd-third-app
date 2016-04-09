@@ -1,0 +1,11 @@
+	<!-- CROWD:START - If enabling Crowd SSO integration uncomment the following SSOSeraphAuthenticator and comment out the JiraSeraphAuthenticator below -->
+    
+    <authenticator class="com.atlassian.jira.security.login.SSOSeraphAuthenticator"/>
+    
+    <!-- CROWD:END -->
+
+    <!-- CROWD:START - The authenticator below here will need to be commented out for Crowd SSO integration -->
+    <!--
+    <authenticator class="com.atlassian.jira.security.login.JiraSeraphAuthenticator"/>
+    -->
+    <!-- CROWD:END -->
