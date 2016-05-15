@@ -17,7 +17,6 @@
        ">
 
 	<!-- 扫描类包，将标注Spring注解的类自动转化Bean，同时完成Bean的注入 -->
-	<context:component-scan base-package="com.whyonly"/>
 	<context:component-scan base-package="com.fangwai"/>
     <context:component-scan base-package="com.fangwai.**.service"/>
     
@@ -29,8 +28,10 @@
         <constructor-arg value="crowd.properties"/>
     </bean>
  
-    <bean id="clientProperties" class="com.atlassian.crowd.service.client.ClientPropertiesImpl" factory-method="newInstanceFromResourceLocator">
-        <constructor-arg type="com.atlassian.crowd.service.client.ResourceLocator" ref="resourceLocator"/>
+    <bean id="clientProperties" class="com.atlassian.crowd.service.client.ClientPropertiesImpl" 
+    		factory-method="newInstanceFromResourceLocator">
+        <constructor-arg type="com.atlassian.crowd.service.client.ResourceLocator" 
+        	ref="resourceLocator"/>
     </bean>
  
     <bean id="crowdClientFactory" class="com.atlassian.crowd.integration.rest.service.factory.RestCrowdClientFactory"/>
@@ -39,9 +40,12 @@
         <constructor-arg ref="clientProperties"/>
     </bean>
  
-    <bean id="validationFactorExtractor" class="com.atlassian.crowd.integration.http.util.CrowdHttpValidationFactorExtractorImpl" factory-method="getInstance"/>
+    <bean id="validationFactorExtractor" 
+    	class="com.atlassian.crowd.integration.http.util.CrowdHttpValidationFactorExtractorImpl" 
+    	factory-method="getInstance"/>
  
-    <bean id="tokenHelper" class="com.atlassian.crowd.integration.http.util.CrowdHttpTokenHelperImpl" factory-method="getInstance">
+    <bean id="tokenHelper" class="com.atlassian.crowd.integration.http.util.CrowdHttpTokenHelperImpl" 
+    	factory-method="getInstance">
         <constructor-arg ref="validationFactorExtractor"/>
     </bean>
  

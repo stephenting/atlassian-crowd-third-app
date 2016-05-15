@@ -40,9 +40,14 @@ public class CrowdBaseAction extends BaseAction{
 	
 	protected void crowdLogin(String username, String password) {
 		try {
-			crowdHttpAuthenticator.authenticate(ServletActionContext.getRequest(), ServletActionContext.getResponse(), username, password);
-		} catch (ExpiredCredentialException | InactiveAccountException | ApplicationPermissionException
-				| InvalidAuthenticationException | OperationFailedException | ApplicationAccessDeniedException
+			crowdHttpAuthenticator.authenticate(
+					ServletActionContext.getRequest(), 
+					ServletActionContext.getResponse(), 
+					username, password);
+		} catch (ExpiredCredentialException | InactiveAccountException 
+				| ApplicationPermissionException
+				| InvalidAuthenticationException | OperationFailedException 
+				| ApplicationAccessDeniedException
 				| InvalidTokenException e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -51,9 +56,12 @@ public class CrowdBaseAction extends BaseAction{
 	
 	protected void crowdLogout(){
 		try {
-			crowdHttpAuthenticator.logout(ServletActionContext.getRequest(), ServletActionContext.getResponse());
-		} catch (ApplicationPermissionException | InvalidAuthenticationException | OperationFailedException e) {
-			// TODO Auto-generated catch block
+			crowdHttpAuthenticator.logout(
+					ServletActionContext.getRequest(), 
+					ServletActionContext.getResponse());
+		} catch (ApplicationPermissionException 
+				| InvalidAuthenticationException 
+				| OperationFailedException e) {
 			e.printStackTrace();
 		}
 	}
@@ -61,8 +69,10 @@ public class CrowdBaseAction extends BaseAction{
 	protected boolean isAuthenticated() {
         if (authenticated == null) {
             try {
-                //authenticated = crowdHttpAuthenticator.isAuthenticated(ServletActionContext.getRequest(), ServletActionContext.getResponse());
-            	AuthenticationState state = crowdHttpAuthenticator.checkAuthenticated(ServletActionContext.getRequest(), ServletActionContext.getResponse());
+            	AuthenticationState state = crowdHttpAuthenticator
+            			.checkAuthenticated(
+            					ServletActionContext.getRequest(), 
+            					ServletActionContext.getResponse());
             	authenticated = state.isAuthenticated();
             }
             catch (Exception e) {
@@ -72,17 +82,17 @@ public class CrowdBaseAction extends BaseAction{
         return authenticated;
     }
 	
+	
 	protected User getRemoteUser(){
         if (!isAuthenticated())
             return null;
         if (remoteUser == null){
             try{
-                // find the user from the authenticated token key.
-                remoteUser = crowdHttpAuthenticator.getUser(ServletActionContext.getRequest());
+                remoteUser = crowdHttpAuthenticator
+                		.getUser(ServletActionContext.getRequest());
             }
             catch (Exception e){
                 e.printStackTrace();
-            	//throw new InvalidAuthenticationException("", e);
             }
         }
         return remoteUser;
